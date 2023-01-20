@@ -23,8 +23,3 @@ df_criptos = get_df_criptos(url_criptos)
 
 response_sms = send_sms(price_dollar, df_criptos)
 response_whatsapp = send_whatsapp(price_dollar, df_criptos)
-
-
-
-    
-
