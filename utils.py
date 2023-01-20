@@ -23,6 +23,8 @@ def get_dollar_today(url_dollar):
         print(e)    
     return price_dollar
 
+
+
 def get_df_criptos(url_criptos):
     try:
         df_criptos = pd.read_json(url_criptos)
@@ -46,5 +48,17 @@ def send_sms(price_dollar, df_criptos):
     )
     return (message.sid)
 
+
+
+def send_whatsapp(price_dollar, df_criptos):
+    account_sid = TWILIO_ACCOUNT_SID
+    auth_token = TWILIO_AUTH_TOKEN
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+                                body='\n¡Hola! \n \n El valor del dolar hoy en COP es: '+str(price_dollar)+' \n \n  El precio de la cripto divisa es: \n \n ' + str(df_criptos),
+                                from_='whatsapp:'+PHONE_NUMBER_WHATSAPP,
+                                to='whatsapp:+573228784083'
+                            )
+    return (message.sid)
 
     

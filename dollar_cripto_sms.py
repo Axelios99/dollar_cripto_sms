@@ -6,14 +6,8 @@
 *********************************************************************************************************
 """
 
-import json
-from datetime import datetime
-import requests
-from requests import Request, Session
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-from twilio.rest import Client
-from scripts_config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PHONE_NUMBER_SMS, PHONE_NUMBER_WHATSAPP, EXCHANGE_TOKEN
-from utils import get_dollar_today, get_df_criptos
+
+from utils import get_dollar_today, get_df_criptos, send_sms, send_whatsapp
 import pandas as pd
 import numpy as np
 
@@ -25,8 +19,10 @@ url_criptos = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&id
 
 
 price_dollar = get_dollar_today(url_dollar)
-
 df_criptos = get_df_criptos(url_criptos)
+
+response_sms = send_sms(price_dollar, df_criptos)
+response_whatsapp = send_whatsapp(price_dollar, df_criptos)
 
 
 
